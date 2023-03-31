@@ -1,0 +1,17 @@
+.header {
+  align-items: center;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  height: 100px;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.header__logo {
+  cursor: pointer;
+  height: 80px;
+  margin: 10px;
+  margin-right: 30px;
+}
