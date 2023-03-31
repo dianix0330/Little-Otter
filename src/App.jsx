@@ -43,22 +43,26 @@ export default function App() {
     [sessions, currentDate]
   );
 
-  const chartData = useMemo(() => Object.entries(sessions).reduce(
-      (result, [key, _]) => {
-        const sessionInfo = dateSessionInfo(key);
-        result.count.push(sessionInfo.count);
-        result.average_age.push(sessionInfo.average_age);
-        result.average_distance.push(sessionInfo.average_distance);
-        result.average_length.push(sessionInfo.average_length);
-        return result;
-      },
-      {
-        count: [],
-        average_age: [],
-        average_distance: [],
-        average_length: [],
-      }
-    ), [sessions]);
+  const chartData = useMemo(
+    () =>
+      Object.entries(sessions).reduce(
+        (result, [key, _]) => {
+          const sessionInfo = dateSessionInfo(key);
+          result.count.push(sessionInfo.count);
+          result.average_age.push(sessionInfo.average_age);
+          result.average_distance.push(sessionInfo.average_distance);
+          result.average_length.push(sessionInfo.average_length);
+          return result;
+        },
+        {
+          count: [],
+          average_age: [],
+          average_distance: [],
+          average_length: [],
+        }
+      ),
+    [sessions, dateSessionInfo]
+  );
 
   const getSessionInfo = (data) => {
     const result = data.reduce((acc, session) => {
@@ -70,7 +74,7 @@ export default function App() {
       });
       return acc;
     }, {});
-    setCurrentDate(moment(data[0]?.start_time).format("YYYY-MM-DD"))
+    setCurrentDate(moment(data[0]?.start_time).format("YYYY-MM-DD"));
     setSessions(result);
   };
 
@@ -88,11 +92,11 @@ export default function App() {
 
   return (
     <div className="App">
-      {loading ? (
-        <div className="loading_spinner"></div>
-      ) : (
-        <div className="main">
-          <Header />
+      <Header />
+      <div className="main">
+        {loading ? (
+          <div className="loading_spinner"></div>
+        ) : (
           <div className="container">
             <div className="section">
               <DateDisplay
@@ -105,8 +109,8 @@ export default function App() {
               <Chart sessionForDates={sessionDates} dataInfo={chartData} />
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
