@@ -43,8 +43,7 @@ export default function App() {
     [sessions, currentDate]
   );
 
-  const chartData = useMemo(() => {
-    const data = Object.entries(sessions).reduce(
+  const chartData = useMemo(() => Object.entries(sessions).reduce(
       (result, [key, _]) => {
         const sessionInfo = dateSessionInfo(key);
         result.count.push(sessionInfo.count);
@@ -59,9 +58,7 @@ export default function App() {
         average_distance: [],
         average_length: [],
       }
-    );
-    return data;
-  }, [sessions]);
+    ), [sessions]);
 
   const getSessionInfo = (data) => {
     const result = data.reduce((acc, session) => {

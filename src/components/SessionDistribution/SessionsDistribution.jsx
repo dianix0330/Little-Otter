@@ -3,8 +3,8 @@ import "./index.css";
 
 export default function SessionsDistribution({ sessionsList }) {
   return (
-    <div className="">
-      <table className="styled-table">
+    <div>
+      <table>
         <thead>
           <tr>
             <th>Provider ID</th>
